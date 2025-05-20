@@ -1,14 +1,23 @@
 import SwiftUI
+import MapKit
 
 struct LocationView: View {
   @Environment(LocationViewModel.self) var viewModel: LocationViewModel
+  
     var body: some View {
-      List {
-        ForEach(viewModel.locations) { location in
-          Text(location.name)
+      ZStack {
+        Map(position: Binding(
+          get: { viewModel.position },
+          set: { viewModel.position = $0 }
+        )) {
+          
         }
+        .onMapCameraChange(frequency: .onEnd, { context in
+          print("\(context.region.center.longitude) : \(context.region.center.latitude)")
+        })
+        .mapControlVisibility(.hidden)
+        .mapStyle(.hybrid(elevation: .realistic))
       }
-      .listStyle(.plain)
     }
 }
 
