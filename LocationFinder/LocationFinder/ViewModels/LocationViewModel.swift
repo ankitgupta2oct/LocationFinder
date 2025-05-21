@@ -8,11 +8,11 @@ final class LocationViewModel {
 
   // MARK: Private
   private(set) var position: MapCameraPosition
-  private(set) var locations: [Location]
   private(set) var location: Location {
     didSet { updateMapPosition(with: location) }
   }
   @ObservationIgnored private let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+  let locations: [Location]
 
   init() {
     let fetchedLocations = LocationsDataService.locations

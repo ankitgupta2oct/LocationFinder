@@ -7,7 +7,7 @@ struct LocationListView: View {
   
     var body: some View {
       List {
-        ForEach(viewModel.locations) { location in
+        ForEach(viewModel.locations.filter { $0.id != viewModel.location.id }) { location in
           Button(action: {
             viewModel.setLocation(for: location)
             viewModel.showLocations = false

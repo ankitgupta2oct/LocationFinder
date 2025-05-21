@@ -24,9 +24,6 @@ private extension LocationView {
       set: { _ in }
     ))
     .animation(.smooth, value: viewModel.position)
-    .onMapCameraChange(frequency: .onEnd, { context in
-      print("\(context.region.center.longitude) : \(context.region.center.latitude)")
-    })
     .mapControlVisibility(.hidden)
   }
   
