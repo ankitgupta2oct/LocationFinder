@@ -6,23 +6,64 @@ struct LocationView: View {
   
     var body: some View {
       ZStack {
-        Map(position: Binding(
-          get: { viewModel.position },
-          set: { viewModel.position = $0 }
-        )) {
-          
+        mapView
+        
+        VStack {
+          titleView
+            .padding()
+          Spacer()
         }
-        .onMapCameraChange(frequency: .onEnd, { context in
-          print("\(context.region.center.longitude) : \(context.region.center.latitude)")
-        })
-        .mapControlVisibility(.hidden)
-        .mapStyle(.hybrid(elevation: .realistic))
       }
     }
 }
 
+private extension LocationView {
+  private var mapView: some View {
+    Map(position: Binding(
+      get: { viewModel.position },
+      set: { _ in }
+    ))
+    .animation(.smooth, value: viewModel.position)
+    .onMapCameraChange(frequency: .onEnd, { context in
+      print("\(context.region.center.longitude) : \(context.region.center.latitude)")
+    })
+    .mapControlVisibility(.hidden)
+  }
+  
+  private var titleView: some View {
+    VStack {
+      Button {
+        withAnimation(.easeIn) {
+          viewModel.showLocations.toggle()
+        }
+      } label: {
+        Text("\(viewModel.location.name), \(viewModel.location.cityName)")
+          .padding()
+          .font(.title2)
+          .bold()
+          .frame(maxWidth: .infinity)
+          .overlay(alignment: .leading) {
+            Image(systemName: "arrow.down")
+              .bold()
+              .rotationEffect(viewModel.showLocations ? .degrees(180) : .zero)
+              .offset(x: 20)
+          }
+      }
+      .foregroundStyle(.black)
+
+      if(viewModel.showLocations) {
+        LocationListView()
+      }
+    }
+    .frame(maxWidth: .infinity)
+    .background(.thinMaterial)
+    .clipShape(.rect(cornerRadius: 10))
+    .shadow(radius: 20, x: 0, y: 10)
+  }
+  
+}
+
 #Preview {
-  let viewModel = LocationViewModel()
     LocationView()
-      .environment(viewModel)
+      .environment(LocationViewModel())
 }
