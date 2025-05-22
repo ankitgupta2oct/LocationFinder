@@ -12,6 +12,16 @@ struct LocationView: View {
           titleView
             .padding()
           Spacer()
+          
+          ForEach(viewModel.locations) { location in
+            if location == viewModel.location {
+              LocationPreviewView(location: location)
+                .padding(.horizontal, 5)
+                .transition(.asymmetric(
+                  insertion: .move(edge: .trailing),
+                  removal: .move(edge: .leading)))
+            }
+          }
         }
       }
     }

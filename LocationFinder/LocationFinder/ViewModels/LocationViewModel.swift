@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 import _MapKit_SwiftUI
 
 @Observable
@@ -30,7 +31,23 @@ final class LocationViewModel {
   
   // Public Methods
   func setLocation(for location: Location) {
-    self.location = location
+    withAnimation {
+      self.location = location
+    }
+  }
+  
+  func setNextLocation() {
+    guard let currentIndex = locations.firstIndex(where: {$0 == location}) else {
+      print("Current location index not found.")
+      return
+    }
+    
+    var nextIndex = currentIndex + 1
+    if nextIndex >= locations.count {
+      nextIndex = 0
+    }
+    
+    setLocation(for: locations[nextIndex])
   }
 
   // MARK: Private methods
