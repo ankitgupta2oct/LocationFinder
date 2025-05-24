@@ -8,6 +8,7 @@ struct LocationDetailView: View {
       ScrollView {
         VStack(alignment: .leading, spacing: 20) {
           locationDetailImageView
+          
           VStack(alignment: .leading) {
             locationHeading
             Divider()
@@ -69,6 +70,7 @@ extension LocationDetailView {
         .foregroundStyle(.primary)
       if let link = URL(string: location.link) {
         Link("Learn More", destination: link)
+          .foregroundStyle(.blue)
       }
     }
   }

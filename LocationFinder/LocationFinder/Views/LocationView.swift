@@ -3,6 +3,7 @@ import MapKit
 
 struct LocationView: View {
   @Environment(LocationViewModel.self) var viewModel: LocationViewModel
+  let maxWidthForIPad: CGFloat = 700
   
     var body: some View {
       ZStack {
@@ -10,6 +11,7 @@ struct LocationView: View {
         
         VStack {
           titleView
+            .frame(maxWidth: maxWidthForIPad)
             .padding()
           Spacer()
           
@@ -17,6 +19,8 @@ struct LocationView: View {
             if location == viewModel.location {
               LocationPreviewView(location: location)
                 .padding(.horizontal, 5)
+                .frame(maxWidth: maxWidthForIPad)
+                .frame(maxWidth: .infinity)
                 .transition(.asymmetric(
                   insertion: .move(edge: .trailing),
                   removal: .move(edge: .leading)))
