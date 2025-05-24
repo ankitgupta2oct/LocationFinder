@@ -19,11 +19,12 @@ struct MapMarkerView: View {
           .rotationEffect(.degrees(180))
           .offset(y: -4)
       }
+      .foregroundStyle(.red)
       .shadow(radius: 10)
-      .visualEffect({ (content, geomatry) in
-        content
-          .offset(y: -geomatry.size.height / 2)
-      })
+//      .visualEffect({ (content, geomatry) in
+//        content
+//          .offset(y: -geomatry.size.height / 2)
+//      })
     }
 }
 

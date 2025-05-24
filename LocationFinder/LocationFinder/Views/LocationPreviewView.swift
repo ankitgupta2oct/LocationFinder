@@ -56,7 +56,7 @@ extension LocationPreviewView {
   
   private var learnMoreButton: some View {
     Button(action: {
-      
+      viewModel.locationDetail = location
     }, label: {
       Text("Learn More")
         .frame(width: 125, height: 35)
@@ -77,4 +77,5 @@ extension LocationPreviewView {
 
 #Preview {
   LocationPreviewView(location: LocationsDataService.locations.first!)
+    .environment(LocationViewModel())
 }

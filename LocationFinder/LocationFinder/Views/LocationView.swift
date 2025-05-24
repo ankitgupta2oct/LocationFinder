@@ -24,6 +24,12 @@ struct LocationView: View {
           }
         }
       }
+      .sheet(item: Binding<Location?>(
+        get: { viewModel.locationDetail },
+        set: { viewModel.locationDetail = $0 }
+      )) { location in
+        LocationDetailView(location: location)
+      }
     }
 }
 

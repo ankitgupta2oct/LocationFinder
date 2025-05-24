@@ -6,13 +6,14 @@ import _MapKit_SwiftUI
 final class LocationViewModel {
   // MARK: Public
   var showLocations = false
+  var locationDetail: Location? = nil
 
   // MARK: Private
   private(set) var position: MapCameraPosition
   private(set) var location: Location {
     didSet { updateMapPosition(with: location) }
   }
-  @ObservationIgnored private let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+  @ObservationIgnored let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
   let locations: [Location]
 
   init() {
