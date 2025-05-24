@@ -17,7 +17,7 @@ final class LocationViewModel {
 
   init() {
     let fetchedLocations = LocationsDataService.locations
-    let firstLocation = fetchedLocations.first!
+    let firstLocation = fetchedLocations.last!
 
     locations = fetchedLocations
     location = firstLocation

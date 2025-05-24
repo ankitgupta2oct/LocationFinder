@@ -32,7 +32,17 @@ private extension LocationView {
     Map(position: Binding(
       get: { viewModel.position },
       set: { _ in }
-    ))
+    )) {
+      ForEach(viewModel.locations) { location in
+        Annotation(location.name, coordinate: location.coordinates) {
+          MapMarkerView()
+            .scaleEffect(viewModel.location == location ? 1.0 : 0.7)
+            .onTapGesture {
+              viewModel.setLocation(for: location)
+            }
+        }
+      }
+    }
     .animation(.smooth, value: viewModel.position)
     .mapControlVisibility(.hidden)
   }
