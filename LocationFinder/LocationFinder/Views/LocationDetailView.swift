@@ -17,6 +17,7 @@ struct LocationDetailView: View {
           }
           .padding()
         }
+        .background(.ultraThinMaterial)
         .overlay(alignment: .topLeading) {
           Button {
             viewModel.locationDetail = nil

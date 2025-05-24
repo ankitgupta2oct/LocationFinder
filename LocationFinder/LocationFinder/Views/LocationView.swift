@@ -65,6 +65,7 @@ private extension LocationView {
           .font(.title2)
           .bold()
           .frame(maxWidth: .infinity)
+          .foregroundStyle(.primary)
           .overlay(alignment: .leading) {
             Image(systemName: "arrow.down")
               .bold()
@@ -72,7 +73,7 @@ private extension LocationView {
               .offset(x: 20)
           }
       }
-      .foregroundStyle(.black)
+      .foregroundStyle(.primary)
 
       if(viewModel.showLocations) {
         LocationListView()
